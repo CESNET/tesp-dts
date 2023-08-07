@@ -4,7 +4,7 @@ services:
     build:
       context: .
     ports:
-      - "5000:5000"  # Map FastAPI server's port to host
+      - "5000:5000"  # Map Flask server's port to host
     volumes:
       - ./uploads:/uploads  # Mount the uploads folder to the container to persist uploaded files
 #    command: uvicorn main:app --host 0.0.0.0 --port 8000

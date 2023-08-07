@@ -14,7 +14,7 @@ COPY requirements.txt ./
 RUN pip3 install -r requirements.txt
 
 COPY main_flask.py ./
-COPY fastapi.py ./
+COPY main_fastapi.py ./
 
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
