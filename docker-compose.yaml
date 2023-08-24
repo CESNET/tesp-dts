@@ -1,23 +1,18 @@
 version: '3.8'
 
 services:
-  minio:
+
+  s3:
     image: minio/minio
     ports:
       - "9000:9000"
       - "9001:9001"
     volumes:
-      - ./data:/data
+      - ./s3/data:/data
     environment:
       MINIO_ROOT_USER: root
       MINIO_ROOT_PASSWORD: 123456789
     command: server --console-address ":9001" /data
-  s3cmd:
-    build:
-      context: ./s3/
-    image: s3cmd
-    depends_on:
-      - minio
 
   ftp:
     build:
@@ -26,7 +21,7 @@ services:
     ports:
       - '2121-2130:2121-2130'
     depends_on:
-      - minio
+      - s3
 
   http:
     build:
@@ -35,6 +30,15 @@ services:
     ports:
       - "5000:5000"  # Map Flask server's port to host
     volumes:
-      - ./uploads:/uploads  # Mount the uploads folder to the container to persist uploaded files
+      - ./http/data:/data  # Mount the uploads folder to the container to persist uploaded files
 #    command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+  clients:
+    build:
+      context: ./clients/
+    image: clients
+    depends_on:
+      - s3
+      - ftp
+      - http
 
