@@ -16,13 +16,13 @@ def upload_file():
 
     if file:
         filename = secure_filename(file.filename)
-        file.save(os.path.join('/uploads', filename))
+        file.save(os.path.join('/data', filename))
         return 'File uploaded successfully.', 200
     return 'No file received.', 400
 
 @app.route('/download/<filename>', methods=['GET'])
 def download_file(filename):
-    return send_from_directory('/uploads', filename, as_attachment=True)
+    return send_from_directory('/data', filename, as_attachment=True)
     file_path = os.path.join('uploads', filename)
     if os.path.exists(file_path):
         return send_file(file_path, as_attachment=True)

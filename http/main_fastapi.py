@@ -6,13 +6,13 @@ app = FastAPI()
 
 @app.post("/upload/")
 async def upload_file(file: UploadFile = File(...)):
-    with open(f"uploads/{file.filename}", "wb") as f:
+    with open(f"data/{file.filename}", "wb") as f:
         shutil.copyfileobj(file.file, f)
     return {"message": "File uploaded successfully."}
 
 @app.get("/download/{filename}")
 async def download_file(filename: str):
-    return FileResponse(f"uploads/{filename}", headers={"Content-Disposition": f"attachment; filename={filename}"})
+    return FileResponse(f"data/{filename}", headers={"Content-Disposition": f"attachment; filename={filename}"})
 
 if __name__ == "__main__":
     import uvicorn
