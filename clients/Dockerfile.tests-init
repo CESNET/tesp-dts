@@ -11,4 +11,5 @@ RUN apt update && apt install -y --no-install-recommends \
 
 COPY .s3cfg /root/
 
-ENTRYPOINT ["sleep", "infinity"]
+# create a bucket for storing tests data and quit 
+ENTRYPOINT ["s3cmd", "mb", "s3://tests-data"]

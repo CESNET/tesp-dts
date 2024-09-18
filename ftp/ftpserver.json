@@ -10,9 +10,9 @@
       "pass": "*",
       "fs": "s3",
       "params": {
-        "endpoint": "http://dts-s3-1:9000",
+        "endpoint": "http://service-s3:9000",
         "region": "us-east-1",
-        "bucket": "test",
+        "bucket": "tests-data",
         "access_key_id": "root",
         "secret_access_key": "123456789",
         "disable_ssl": "true",
@@ -21,4 +21,3 @@
     }
   ]
 }
-
