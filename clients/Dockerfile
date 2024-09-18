@@ -7,7 +7,8 @@ RUN apt update && apt install -y --no-install-recommends \
         wget \
         nmap \
         vim \
-        s3cmd
+        s3cmd \
+        lftp
 
 COPY .s3cfg /root/
 

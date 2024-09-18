@@ -68,9 +68,16 @@ List all object in all buckets
 
 Get some data
 ```
-curl -o sample.jpg https://github.blog/wp-content/uploads/2024/07/github-logo.png
+curl -o /tmp/sample.jpg https://github.blog/wp-content/uploads/2024/07/github-logo.png
 ```
 
+#### Access vi FTP
+
+```
+lftp -p 2121 -e "put /tmp/sample.jpg; get $(basename $TEMP_FILE) -o /tmp/sample_back.jpg; bye" service-ftp
+```
+
+#### Access vi HTTP
 Upload data 
 ```
 curl -v -T sample.jpg ftp://service-ftp:2121/
